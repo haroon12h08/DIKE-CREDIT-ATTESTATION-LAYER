@@ -57,6 +57,15 @@ contract DIKERegistry is ERC721, Ownable {
     /// @notice Maps a user address to their aggregated lifecycle credit statistics.
     mapping(address => UserTotals) public userTotals;
 
+    /// @notice Total principal borrowed across the protocol.
+    uint256 public totalSystemBorrowed;
+
+    /// @notice Total principal repaid across the protocol.
+    uint256 public totalSystemRepaid;
+
+    /// @notice Total count of default events across the protocol.
+    uint256 public totalSystemDefaults;
+
     /**
      * @notice Emitted when a new verifiable credit event is registered.
      * @param eventId The globally unique identifier of this event and corresponding NFT receipt.
@@ -109,17 +118,8 @@ contract DIKERegistry is ERC721, Ownable {
 
         userEventIds[subject].push(eventId);
 
-        UserTotals storage totals = userTotals[subject];
-        if (eventType == EventType.BORROW) {
-            totals.totalBorrowed += amount;
-        } else if (eventType == EventType.REPAY_ON_TIME) {
-            totals.totalRepaid += amount;
-            totals.onTimeRepayments++;
-        } else if (eventType == EventType.REPAY_LATE) {
-            totals.totalRepaid += amount;
-        } else if (eventType == EventType.DEFAULT) {
-            totals.defaults++;
-        }
+        _updateUserTotals(subject, amount, eventType);
+        _updateSystemTotals(amount, eventType);
 
         _mint(subject, eventId);
 
@@ -143,6 +143,44 @@ contract DIKERegistry is ERC721, Ownable {
     function getCreditEvent(uint256 eventId) external view returns (CreditEvent memory) {
         require(eventId < nextEventId, "Event does not exist");
         return creditEvents[eventId];
+    }
+
+    /**
+     * @notice Internally cascades credit actions into the user's localized accounting map.
+     * @param subject The user receiving the mapped updates.
+     * @param amount The principal size of the underlying credit action.
+     * @param eventType The specific categorisation of the event.
+     */
+    function _updateUserTotals(address subject, uint256 amount, EventType eventType) internal {
+        UserTotals storage totals = userTotals[subject];
+        totals.totalEvents++;
+        
+        if (eventType == EventType.BORROW) {
+            totals.totalBorrowed += amount;
+        } else if (eventType == EventType.REPAY_ON_TIME) {
+            totals.totalRepaid += amount;
+            totals.onTimeRepayments++;
+        } else if (eventType == EventType.REPAY_LATE) {
+            totals.totalRepaid += amount;
+            totals.lateRepayments++;
+        } else if (eventType == EventType.DEFAULT) {
+            totals.defaults++;
+        }
+    }
+
+    /**
+     * @notice Internally cascades credit actions into the global system accounting map.
+     * @param amount The principal size of the underlying credit action.
+     * @param eventType The specific categorisation of the event.
+     */
+    function _updateSystemTotals(uint256 amount, EventType eventType) internal {
+        if (eventType == EventType.BORROW) {
+            totalSystemBorrowed += amount;
+        } else if (eventType == EventType.REPAY_ON_TIME || eventType == EventType.REPAY_LATE) {
+            totalSystemRepaid += amount;
+        } else if (eventType == EventType.DEFAULT) {
+            totalSystemDefaults++;
+        }
     }
 
     /**
@@ -175,5 +213,95 @@ contract DIKERegistry is ERC721, Ownable {
                 Base64.encode(bytes(json))
             )
         );
+    }
+
+    /**
+     * @dev Calculates the on-time repayment ratio scaled by 1e18.
+     * @param user The address to calculate the ratio for.
+     * @return Ratio of on-time to total repayments as percentage scaled by 1e18.
+     */
+    function _onTimeRepaymentRatio(address user) internal view returns (uint256) {
+        UserTotals storage totals = userTotals[user];
+        if (totals.totalRepaid == 0) {
+            return 0;
+        }
+        uint256 totalRepayments = totals.onTimeRepayments + totals.lateRepayments;
+        return totalRepayments == 0 ? 0 : (totals.onTimeRepayments * 1e18) / totalRepayments;
+    }
+
+    /**
+     * @dev Calculates the default rate percentage scaled by 1e18.
+     * @param user The address to calculate the rate for.
+     * @return Ratio of defaults to total events as percentage scaled by 1e18.
+     */
+    function _defaultRate(address user) internal view returns (uint256) {
+        UserTotals storage totals = userTotals[user];
+        if (totals.totalEvents == 0) {
+            return 0;
+        }
+        return (totals.defaults * 1e18) / totals.totalEvents;
+    }
+
+    /**
+     * @notice Retrieves a comprehensive credit profile for a user, including raw metrics and deterministic ratios.
+     * @param user The address of the user to query.
+     * @return totalBorrowed The cumulative amount of principal borrowed.
+     * @return totalRepaid The cumulative amount of principal repaid (late or on time).
+     * @return defaults The total count of default events.
+     * @return onTimeRepayments The total count of on-time repayment events.
+     * @return lateRepayments The total count of late repayment events.
+     * @return totalEvents The absolute total of recorded credit actions.
+     * @return onTimeRatio The deterministically calculated on-time repayment percentage (scaled by 1e18).
+     * @return defaultRate The deterministically calculated default rate percentage (scaled by 1e18).
+     */
+    function getCreditSummary(address user) external view returns (
+        uint256 totalBorrowed,
+        uint256 totalRepaid,
+        uint256 defaults,
+        uint256 onTimeRepayments,
+        uint256 lateRepayments,
+        uint256 totalEvents,
+        uint256 onTimeRatio,
+        uint256 defaultRate
+    ) {
+        UserTotals storage totals = userTotals[user];
+        
+        return (
+            totals.totalBorrowed,
+            totals.totalRepaid,
+            totals.defaults,
+            totals.onTimeRepayments,
+            totals.lateRepayments,
+            totals.totalEvents,
+            _onTimeRepaymentRatio(user),
+            _defaultRate(user)
+        );
+    }
+
+    /**
+     * @notice Calculates the total net outstanding debt currently associated with a user.
+     * @param user The address of the user to query.
+     * @return The remaining borrowed principal, floored at 0 to prevent underflow.
+     */
+    function getOutstandingDebt(address user) external view returns (uint256) {
+        UserTotals storage totals = userTotals[user];
+        if (totals.totalRepaid > totals.totalBorrowed) {
+            return 0;
+        }
+        return totals.totalBorrowed - totals.totalRepaid;
+    }
+
+    /**
+     * @notice Retrieves aggregated protocol-wide credit metrics.
+     * @return borrowed Total principal borrowed across the system.
+     * @return repaid Total principal repaid across the system.
+     * @return defaults Total number of default events in the system.
+     */
+    function getSystemMetrics() external view returns (
+        uint256 borrowed,
+        uint256 repaid,
+        uint256 defaults
+    ) {
+        return (totalSystemBorrowed, totalSystemRepaid, totalSystemDefaults);
     }
 }
