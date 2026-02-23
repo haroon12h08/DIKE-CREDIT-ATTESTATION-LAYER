@@ -4,3 +4,5 @@
 export * as dikeuscBridgeSol from "./DIKEUSCBridge.sol";
 export { DIKERegistry__factory } from "./DIKERegistry__factory";
 export { IDIKERegistry__factory } from "./IDIKERegistry__factory";
+export { MockLendingProtocol__factory } from "./MockLendingProtocol__factory";
+export { MockToken__factory } from "./MockToken__factory";

@@ -5,3 +5,5 @@ import type * as dikeuscBridgeSol from "./DIKEUSCBridge.sol";
 export type { dikeuscBridgeSol };
 export type { DIKERegistry } from "./DIKERegistry";
 export type { IDIKERegistry } from "./IDIKERegistry";
+export type { MockLendingProtocol } from "./MockLendingProtocol";
+export type { MockToken } from "./MockToken";

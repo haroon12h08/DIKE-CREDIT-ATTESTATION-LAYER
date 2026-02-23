@@ -6,6 +6,8 @@ dotenv.config();
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0000000000000000000000000000000000000000000000000000000000000000";
 const CREDITCOIN_RPC = process.env.CREDITCOIN_RPC || "https://rpc.cc3-testnet.creditcoin.network";
+const SEPOLIA_RPC = process.env.SEPOLIA_RPC || "https://rpc.sepolia.org";
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -24,12 +26,15 @@ const config: HardhatUserConfig = {
       url: CREDITCOIN_RPC,
       chainId: 102031,
       accounts: [PRIVATE_KEY]
+    },
+    sepolia: {
+      url: SEPOLIA_RPC,
+      chainId: 11155111,
+      accounts: [PRIVATE_KEY]
     }
   },
   etherscan: {
-    apiKey: {
-      creditcoinTestnet: "unnecessary-but-required",
-    },
+    apiKey: ETHERSCAN_API_KEY,
     customChains: [
       {
         network: "creditcoinTestnet",

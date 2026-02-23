@@ -14,6 +14,12 @@ export type { IERC20Errors } from "./@openzeppelin/contracts/interfaces/draft-IE
 export { IERC20Errors__factory } from "./factories/@openzeppelin/contracts/interfaces/draft-IERC6093.sol/IERC20Errors__factory";
 export type { IERC721Errors } from "./@openzeppelin/contracts/interfaces/draft-IERC6093.sol/IERC721Errors";
 export { IERC721Errors__factory } from "./factories/@openzeppelin/contracts/interfaces/draft-IERC6093.sol/IERC721Errors__factory";
+export type { ERC20 } from "./@openzeppelin/contracts/token/ERC20/ERC20";
+export { ERC20__factory } from "./factories/@openzeppelin/contracts/token/ERC20/ERC20__factory";
+export type { IERC20Metadata } from "./@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata";
+export { IERC20Metadata__factory } from "./factories/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata__factory";
+export type { IERC20 } from "./@openzeppelin/contracts/token/ERC20/IERC20";
+export { IERC20__factory } from "./factories/@openzeppelin/contracts/token/ERC20/IERC20__factory";
 export type { ERC721 } from "./@openzeppelin/contracts/token/ERC721/ERC721";
 export { ERC721__factory } from "./factories/@openzeppelin/contracts/token/ERC721/ERC721__factory";
 export type { IERC721Metadata } from "./@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata";
@@ -38,3 +44,7 @@ export type { DIKEUSCBridge } from "./contracts/DIKEUSCBridge.sol/DIKEUSCBridge"
 export { DIKEUSCBridge__factory } from "./factories/contracts/DIKEUSCBridge.sol/DIKEUSCBridge__factory";
 export type { IDIKERegistry } from "./contracts/DIKEUSCBridge.sol/IDIKERegistry";
 export { IDIKERegistry__factory } from "./factories/contracts/DIKEUSCBridge.sol/IDIKERegistry__factory";
+export type { MockLendingProtocol } from "./contracts/MockLendingProtocol";
+export { MockLendingProtocol__factory } from "./factories/contracts/MockLendingProtocol__factory";
+export type { MockToken } from "./contracts/MockToken";
+export { MockToken__factory } from "./factories/contracts/MockToken__factory";
