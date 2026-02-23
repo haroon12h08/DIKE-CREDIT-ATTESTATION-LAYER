@@ -77,6 +77,7 @@ export interface DIKERegistryInterface extends Interface {
       | "totalSystemRepaid"
       | "transferFrom"
       | "transferOwnership"
+      | "usedReferences"
       | "userTotals"
   ): FunctionFragment;
 
@@ -189,6 +190,10 @@ export interface DIKERegistryInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "usedReferences",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "userTotals",
     values: [AddressLike]
   ): string;
@@ -278,6 +283,10 @@ export interface DIKERegistryInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "usedReferences",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "userTotals", data: BytesLike): Result;
@@ -567,6 +576,8 @@ export interface DIKERegistry extends BaseContract {
     "nonpayable"
   >;
 
+  usedReferences: TypedContractMethod<[arg0: BytesLike], [boolean], "view">;
+
   userTotals: TypedContractMethod<
     [arg0: AddressLike],
     [
@@ -746,6 +757,9 @@ export interface DIKERegistry extends BaseContract {
   getFunction(
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "usedReferences"
+  ): TypedContractMethod<[arg0: BytesLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "userTotals"
   ): TypedContractMethod<

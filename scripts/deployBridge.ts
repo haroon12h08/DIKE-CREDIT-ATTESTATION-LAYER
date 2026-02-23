@@ -1,6 +1,6 @@
 import { ethers, network } from "hardhat";
 
-const REGISTRY_ADDRESS = "0x2D54be78A430792ed9ed1024f5e625C031E2ebB4";
+const REGISTRY_ADDRESS = "0xa194558f68f69eAaA8bbb55700D408349663E57C";
 
 async function main() {
     console.log(`\n--- Deploying DIKEUSCBridge to ${network.name} ---`);
@@ -31,11 +31,10 @@ async function main() {
 
     const newOwner = await registry.owner();
 
-    if (newOwner === bridgeAddress) {
-        console.log(`✅ Ownership transfer confirmed! Registry is now owned by: ${newOwner}`);
-    } else {
-        console.error(`❌ Ownership transfer failed! Current Owner: ${newOwner}`);
+    if (newOwner !== bridgeAddress) {
+        throw new Error(`Ownership transfer failed! Current Owner: ${newOwner}`);
     }
+    console.log(`✅ Ownership transfer confirmed! Registry is now owned by: ${newOwner}`);
 }
 
 main().catch((error) => {

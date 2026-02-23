@@ -51,6 +51,9 @@ contract DIKERegistry is ERC721, Ownable {
     /// @notice Maps a unique event ID to its full CreditEvent details.
     mapping(uint256 => CreditEvent) public creditEvents;
 
+    /// @notice Tracks used reference hashes to prevent duplicate minting.
+    mapping(bytes32 => bool) public usedReferences;
+
     /// @dev Maps a user address to an array of standard event IDs they are associated with.
     mapping(address => uint256[]) private userEventIds;
 
@@ -105,6 +108,9 @@ contract DIKERegistry is ERC721, Ownable {
     ) external onlyOwner {
         require(subject != address(0), "Invalid subject: zero address");
         require(amount > 0, "Amount must be strictly positive");
+        require(!usedReferences[referenceHash], "Duplicate reference");
+
+        usedReferences[referenceHash] = true;
 
         uint256 eventId = nextEventId++;
 
@@ -189,7 +195,7 @@ contract DIKERegistry is ERC721, Ownable {
      * @return A Base64-encoded data URI containing JSON metadata.
      */
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(tokenId < nextEventId, "Event does not exist");
+        require(_ownerOf(tokenId) != address(0), "Nonexistent token");
         
         CreditEvent memory evt = creditEvents[tokenId];
         
@@ -200,7 +206,7 @@ contract DIKERegistry is ERC721, Ownable {
                 '"attributes": [',
                     '{"trait_type": "Subject", "value": "', Strings.toHexString(uint160(evt.subject), 20), '"},',
                     '{"trait_type": "Amount", "value": "', Strings.toString(evt.amount), '"},',
-                    '{"trait_type": "Event Type", "value": "', Strings.toString(uint256(evt.eventType)), '"},',
+                    '{"trait_type": "Event Type", "value": "', _eventTypeToString(evt.eventType), '"},',
                     '{"trait_type": "Timestamp", "display_type": "date", "value": ', Strings.toString(evt.timestamp), '},',
                     '{"trait_type": "Reference Hash", "value": "', Strings.toHexString(uint256(evt.referenceHash), 32), '"}'
                 ']}'
@@ -213,6 +219,17 @@ contract DIKERegistry is ERC721, Ownable {
                 Base64.encode(bytes(json))
             )
         );
+    }
+
+    /**
+     * @dev Converts EventType enum to a human-readable string.
+     */
+    function _eventTypeToString(EventType eventType) internal pure returns (string memory) {
+        if (eventType == EventType.BORROW) return "BORROW";
+        if (eventType == EventType.REPAY_ON_TIME) return "REPAY_ON_TIME";
+        if (eventType == EventType.REPAY_LATE) return "REPAY_LATE";
+        if (eventType == EventType.DEFAULT) return "DEFAULT";
+        return "UNKNOWN";
     }
 
     /**
