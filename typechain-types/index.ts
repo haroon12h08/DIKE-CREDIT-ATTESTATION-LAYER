@@ -28,7 +28,13 @@ export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
 export type { SafeCast } from "./@openzeppelin/contracts/utils/math/SafeCast";
 export { SafeCast__factory } from "./factories/@openzeppelin/contracts/utils/math/SafeCast__factory";
+export type { Pausable } from "./@openzeppelin/contracts/utils/Pausable";
+export { Pausable__factory } from "./factories/@openzeppelin/contracts/utils/Pausable__factory";
 export type { Strings } from "./@openzeppelin/contracts/utils/Strings";
 export { Strings__factory } from "./factories/@openzeppelin/contracts/utils/Strings__factory";
 export type { DIKERegistry } from "./contracts/DIKERegistry";
 export { DIKERegistry__factory } from "./factories/contracts/DIKERegistry__factory";
+export type { DIKEUSCBridge } from "./contracts/DIKEUSCBridge.sol/DIKEUSCBridge";
+export { DIKEUSCBridge__factory } from "./factories/contracts/DIKEUSCBridge.sol/DIKEUSCBridge__factory";
+export type { IDIKERegistry } from "./contracts/DIKEUSCBridge.sol/IDIKERegistry";
+export { IDIKERegistry__factory } from "./factories/contracts/DIKEUSCBridge.sol/IDIKERegistry__factory";

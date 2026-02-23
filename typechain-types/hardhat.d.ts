@@ -58,6 +58,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SafeCast__factory>;
     getContractFactory(
+      name: "Pausable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Pausable__factory>;
+    getContractFactory(
       name: "Strings",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Strings__factory>;
@@ -65,6 +69,18 @@ declare module "hardhat/types/runtime" {
       name: "DIKERegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DIKERegistry__factory>;
+    getContractFactory(
+      name: "DIKEUSCBridge",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DIKEUSCBridge__factory>;
+    getContractFactory(
+      name: "IDIKERegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IDIKERegistry__factory>;
+    getContractFactory(
+      name: "IDIKERegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IDIKERegistry__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -122,6 +138,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SafeCast>;
     getContractAt(
+      name: "Pausable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Pausable>;
+    getContractAt(
       name: "Strings",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -131,6 +152,21 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.DIKERegistry>;
+    getContractAt(
+      name: "DIKEUSCBridge",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DIKEUSCBridge>;
+    getContractAt(
+      name: "IDIKERegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IDIKERegistry>;
+    getContractAt(
+      name: "IDIKERegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IDIKERegistry>;
 
     deployContract(
       name: "Ownable",
@@ -177,6 +213,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SafeCast>;
     deployContract(
+      name: "Pausable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Pausable>;
+    deployContract(
       name: "Strings",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Strings>;
@@ -184,6 +224,18 @@ declare module "hardhat/types/runtime" {
       name: "DIKERegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DIKERegistry>;
+    deployContract(
+      name: "DIKEUSCBridge",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DIKEUSCBridge>;
+    deployContract(
+      name: "IDIKERegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IDIKERegistry>;
+    deployContract(
+      name: "IDIKERegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IDIKERegistry>;
 
     deployContract(
       name: "Ownable",
@@ -241,6 +293,11 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SafeCast>;
     deployContract(
+      name: "Pausable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Pausable>;
+    deployContract(
       name: "Strings",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -250,6 +307,21 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DIKERegistry>;
+    deployContract(
+      name: "DIKEUSCBridge",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DIKEUSCBridge>;
+    deployContract(
+      name: "IDIKERegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IDIKERegistry>;
+    deployContract(
+      name: "IDIKERegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IDIKERegistry>;
 
     // default types
     getContractFactory(

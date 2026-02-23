@@ -1,0 +1,39 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IDIKERegistry",
+  "sourceName": "contracts/IDIKERegistry.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "subject",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum IDIKERegistry.EventType",
+          "name": "eventType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "referenceHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "recordEvent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
