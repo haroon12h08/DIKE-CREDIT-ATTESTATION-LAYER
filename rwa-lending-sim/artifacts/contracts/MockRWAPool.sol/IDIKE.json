@@ -1,0 +1,60 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IDIKE",
+  "sourceName": "contracts/MockRWAPool.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getCreditSummary",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalBorrowed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalRepaid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "defaultCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "onTimeCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lateCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "activeObligations",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastUpdated",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

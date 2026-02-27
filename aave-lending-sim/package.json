@@ -1,0 +1,17 @@
+{
+    "name": "aave-lending-sim",
+    "version": "1.0.0",
+    "description": "Minimal Aave-style DeFi lending simulation with optional DIKE integration",
+    "scripts": {
+        "compile": "npx hardhat --config hardhat.config.js compile",
+        "node": "npx hardhat --config hardhat.config.js node",
+        "deploy": "npx hardhat --config hardhat.config.js run scripts/deploy.js --network localhost",
+        "simulate": "npx hardhat --config hardhat.config.js run scripts/simulate.js --network localhost",
+        "test": "npx hardhat --config hardhat.config.js test"
+    },
+    "devDependencies": {
+        "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+        "hardhat": "^2.22.0",
+        "dotenv": "^16.0.0"
+    }
+}

@@ -1,0 +1,78 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/haroon12h8/Desktop/DIKE/cross-chain-sim/contracts/MockChainLending.sol": {
+      "lastModificationDate": 1772125636273,
+      "contentHash": "568dce776347b7285675f61cf0424cdd",
+      "sourceName": "contracts/MockChainLending.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IDIKE",
+        "MockChainLending"
+      ]
+    },
+    "/home/haroon12h8/Desktop/DIKE/cross-chain-sim/contracts/MockDIKERegistry.sol": {
+      "lastModificationDate": 1772125634272,
+      "contentHash": "851ee03bd36dfc94466b0142cb169d11",
+      "sourceName": "contracts/MockDIKERegistry.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "MockDIKERegistry"
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/haroon12h8/Desktop/DIKE/aave-lending-sim/contracts/MockAaveLending.sol": {
+      "lastModificationDate": 1772120245254,
+      "contentHash": "e56af888a74ced7affcf43faa0eaf3c7",
+      "sourceName": "contracts/MockAaveLending.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IDIKE",
+        "MockAaveLending"
+      ]
+    },
+    "/home/haroon12h8/Desktop/DIKE/aave-lending-sim/contracts/MockDIKE.sol": {
+      "lastModificationDate": 1772120243200,
+      "contentHash": "de2cc45eca8d7be10344b9f5c432af7e",
+      "sourceName": "contracts/MockDIKE.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "MockDIKE"
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/haroon12h8/Desktop/DIKE/rwa-lending-sim/contracts/MockDIKE.sol": {
+      "lastModificationDate": 1772124972643,
+      "contentHash": "3b8dc8f9f396356a6fd2aab76230f501",
+      "sourceName": "contracts/MockDIKE.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "MockDIKE"
+      ]
+    },
+    "/home/haroon12h8/Desktop/DIKE/rwa-lending-sim/contracts/MockRWAPool.sol": {
+      "lastModificationDate": 1772124974626,
+      "contentHash": "da61135a964903725da5f5fe6bb1f91b",
+      "sourceName": "contracts/MockRWAPool.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IDIKE",
+        "MockRWAPool"
+      ]
+    }
+  }
+}
